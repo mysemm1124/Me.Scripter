@@ -1519,7 +1519,7 @@ const AI_SYSTEM=`너는 시나리오 트리트먼트를 읽고, 존 트루비의
 출력은 아래 JSON 객체 하나만, 다른 말 없이:
 {"결핍":"","욕망":"","적수":"","계획":"","결전":"","자기 발견":"","새로운 균형":""}`;
 // Gemini (Firebase AI Logic) — 사용자는 키 없이 사용, 사용량은 이 사이트의 Firebase 프로젝트 무료 한도
-const GEMINI_MODELS=['gemini-4-hydrogen','gemini-3.8-flash'];
+const GEMINI_MODELS=['gemini-3.8-flash','gemini-3.5-flash-lite','gemini-4-hydrogen']; // 빠른 모델 우선
 const aiReady=()=>!!(fb&&fb.ai);
 function aiUnavailable(){
   if(IS_MOBILE)return '';
@@ -1547,7 +1547,7 @@ function maybeAutoAI(){
   clearTimeout(aiT);
   if(mode!=='treat'||!S.aiOn||IS_MOBILE||aiBusy||!aiReady())return;
   const r=rootDoc(curDoc());if(!aiStale(r))return;
-  aiT=setTimeout(runAI,r.treatAI?15000:1500); // 처음엔 바로, 이후엔 15초 동안 입력이 멈추면 다시 요약
+  aiT=setTimeout(runAI,r.treatAI?8000:1500); // 처음엔 바로, 이후엔 8초 동안 입력이 멈추면 다시 요약
 }
 function aiErrMsg(e){
   const m=String((e&&(e.message||e.code))||'');
