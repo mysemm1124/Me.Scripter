@@ -128,12 +128,12 @@ aside section+section{margin-top:22px}
 .sugg .sh{font-size:11px;color:var(--sub);padding:4px 10px 2px;border-top:1px solid var(--line);margin-top:3px}
 
 /* status */
-.status{flex:none;display:flex;justify-content:space-between;gap:12px;padding:6px 14px;background:#fff;border-top:1px solid var(--line);font-size:12px;color:var(--sub)}
+.status{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 14px;min-height:24px;background:#fff;border-top:1px solid var(--line);font-size:11.5px;line-height:1.4;color:var(--sub)}
 .status b{color:var(--ink);font-weight:600;margin-right:6px}
 #stats{white-space:nowrap}
 .sright{display:flex;align-items:center;gap:14px}
 .zoom{display:flex;align-items:center;gap:2px}
-.zoom button{border:1px solid var(--line);background:#fff;border-radius:6px;width:22px;height:20px;line-height:1;padding:0;color:var(--sub);font-size:13px}
+.zoom button{border:1px solid var(--line);background:#fff;border-radius:5px;width:18px;height:16px;line-height:1;padding:0;color:var(--sub);font-size:11px}
 .zoom button:hover{color:var(--ink);border-color:var(--accent)}
 .zoom span{min-width:64px;text-align:center;font-variant-numeric:tabular-nums;cursor:pointer}
 #measure{position:absolute;left:-99999px;top:0;width:16.6cm;visibility:hidden;pointer-events:none}
@@ -352,7 +352,7 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
   </div>
 </div>
 
-<footer class="status"><span id="hint"></span><span class="sright"><span id="stats"></span><span class="zoom" title="종이 보기 배율 · 숫자를 누르면 폭 맞춤"><button id="zOut">−</button><span id="zVal">100%</span><button id="zIn">＋</button></span></span></footer>
+<footer class="status"><span id="hint"></span><span class="sright"><span id="stats"></span><span class="zoom" title="종이 보기 배율 · 숫자를 누르면 100% ↔ 폭 맞춤"><button id="zOut">−</button><span id="zVal">100%</span><button id="zIn">＋</button></span></span></footer>
 <div id="measure" class="sheet" aria-hidden="true"></div>
 <div class="sugg" id="sugg" hidden></div>
 <div class="toast" id="toast"></div>
@@ -493,7 +493,7 @@ const SCENE_FMTS=[{pre:'S#',suf:'.'},{pre:'S#',suf:''},{pre:'#',suf:'.'},{pre:''
 const FONTS={sans:'"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif',serif:'"AppleMyungjo","Nanum Myeongjo","NanumMyeongjo","Batang","Noto Serif KR",serif'};
 // 워드의 '1줄'은 맑은 고딕 기준 글자 크기의 약 1.2배 높이
 const WORD_LH=1.2;
-const DEF={dlgStyle:'center',cueBold:true,sceneBold:true,cueWidth:6,sceneFmt:0,sceneSep:'/',font:'sans',fontSize:11,sceneSize:11,fsUnit:'pt',lineHeight:1.5,lhUnit:'word',spaceSplit:true,cmpDiff:true,cmpSync:true,zoom:1,zoomFit:true,aiOn:true};
+const DEF={dlgStyle:'center',cueBold:true,sceneBold:true,cueWidth:6,sceneFmt:0,sceneSep:'/',font:'sans',fontSize:11,sceneSize:11,fsUnit:'pt',lineHeight:1.5,lhUnit:'word',spaceSplit:true,cmpDiff:true,cmpSync:true,zoom:1,zoomFit:false,aiOn:true};
 const GUEST_KEY='mescript-v1',LAST_UID='mescripter-last-uid',ukeyOf=uid=>'mescripter-u-'+uid;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>Math.random().toString(36).slice(2,10);
@@ -1710,7 +1710,8 @@ function setZoom(z){S.zoomFit=false;S.zoom=Math.round(Math.min(3,Math.max(.4,z))
 const curZ=()=>S.zoomFit===false?S.zoom||1:fitZ;
 $('#zIn').addEventListener('click',()=>setZoom(curZ()+.1));
 $('#zOut').addEventListener('click',()=>setZoom(curZ()-.1));
-$('#zVal').addEventListener('click',()=>{S.zoomFit=true;layoutZoom();metaDirty=true;scheduleSave()});
+// 숫자 누르기: 100% ↔ 폭 맞춤
+$('#zVal').addEventListener('click',()=>{if(S.zoomFit===false&&S.zoom===1)S.zoomFit=true;else{S.zoomFit=false;S.zoom=1}layoutZoom();metaDirty=true;scheduleSave()});
 {const ro=new ResizeObserver(()=>layoutZoom());[mainEl,scroller,origScroller,$('.treatMain')].forEach(el=>ro.observe(el))}
 
 /* ---------- init ---------- */
