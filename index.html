@@ -6,10 +6,10 @@
 <title>Me.Scripter</title>
 <style>
 :root{
-  --bg:#eeebe5; --paper:#fffdf9; --ink:#1f1d1a; --sub:#8a847b; --faint:#c9c3b9; --line:#e4dfd6;
-  --accent:#c2410c; --accent-soft:#fbe9df; --panel:#f7f5f1;
+  --bg:#EDEDED; --paper:#FFFFFF; --ink:#1E201C; --sub:#80847C; --faint:#C4C7C0; --line:#DEDFDB;
+  --accent:#C1CFB2; --accent-soft:#E8EEE1; --accent-ink:#5A7048; --panel:#F6F6F4;
   --font:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
-  --fs:15px; --lh:1.8; --cue-w:6em;
+  --fs:11pt; --scene-fs:11pt; --lh:1.8; --cue-w:6em;
   --scene-pre:"S#"; --scene-suf:".";
 }
 *{box-sizing:border-box}
@@ -21,7 +21,7 @@ button{cursor:pointer}
 /* header */
 .top{display:flex;align-items:center;gap:8px;padding:8px 14px;background:#fff;border-bottom:1px solid var(--line);flex:none}
 .brand{font-weight:500;letter-spacing:-.02em;margin-right:6px;font-size:15px;white-space:nowrap}
-.brand b{color:var(--accent)}
+.brand b{color:var(--accent-ink)}
 .top select{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 8px;max-width:180px}
 .top #title{border:1px solid transparent;background:transparent;border-radius:8px;padding:5px 8px;font-weight:600;min-width:120px;flex:0 1 260px}
 .top #title:hover,.top #title:focus{border-color:var(--line);background:var(--panel);outline:none}
@@ -41,11 +41,11 @@ aside.hide{display:none}
 aside h3{font-size:12px;font-weight:600;color:var(--sub);margin:4px 4px 8px;letter-spacing:.02em;display:flex;justify-content:space-between}
 aside section+section{margin-top:22px}
 #scenes{list-style:none;margin:0;padding:0}
-#scenes li{padding:5px 8px;border-radius:7px;cursor:pointer;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#4a463f}
-#scenes li:hover{background:#ece8e1}
-#scenes li.on{background:var(--accent-soft);color:var(--accent)}
+#scenes li{padding:5px 8px;border-radius:7px;cursor:pointer;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#474A44}
+#scenes li:hover{background:#EBEBE8}
+#scenes li.on{background:var(--accent-soft);color:var(--accent-ink)}
 #scenes li span{color:var(--sub);margin-right:6px;font-variant-numeric:tabular-nums}
-#scenes li.on span{color:var(--accent)}
+#scenes li.on span{color:var(--accent-ink)}
 #scenes .empty,#chars .empty{color:var(--faint);font-size:12px;padding:2px 8px;margin:0;cursor:default}
 #chars{display:flex;flex-wrap:wrap;gap:5px;padding:0 2px}
 .chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 4px 3px 10px;font-size:13px;cursor:pointer;user-select:none}
@@ -69,16 +69,16 @@ aside section+section{margin-top:22px}
 #printTitle{display:none}
 
 /* editor */
-.sheet{outline:none;font-family:var(--font);font-size:var(--fs);line-height:var(--lh);counter-reset:scene;caret-color:var(--accent);word-break:keep-all;overflow-wrap:anywhere}
+.sheet{outline:none;font-family:var(--font);font-size:var(--fs);line-height:var(--lh);counter-reset:scene;caret-color:var(--accent-ink);word-break:keep-all;overflow-wrap:anywhere}
 .sheet .b{position:relative;clear:both;white-space:pre-wrap;min-height:calc(var(--lh) * 1em)}
 .sheet .b[data-t=action]{margin:.15em 0}
-.sheet .b[data-t=scene]{counter-increment:scene;margin:1.9em 0 .55em}
+.sheet .b[data-t=scene]{counter-increment:scene;font-size:var(--scene-fs);margin:1.9em 0 .55em}
 .sheet .b[data-t=scene]:first-child{margin-top:0}
 .sheet.scene-bold .b[data-t=scene]{font-weight:700}
 .sheet .b[data-t=scene]::before{content:var(--scene-pre) counter(scene) var(--scene-suf) "\00a0";user-select:none;-webkit-user-select:none}
 .sheet .b[data-t=cue]{margin-top:.9em}
 .sheet.cue-bold .b[data-t=cue]{font-weight:700}
-.sheet .b[data-t=paren]{color:#5d5850}
+.sheet .b[data-t=paren]{color:#5E615A}
 .sheet .b[data-t=line]+.b[data-t=action],.sheet .b[data-t=paren]+.b[data-t=action]{margin-top:.9em}
 
 /* 대사 형식: 가운데 */
@@ -99,14 +99,14 @@ aside section+section{margin-top:22px}
 .sheet .b.cur.isempty[data-t=cue]::after{content:"이름"}
 .sheet .b.cur.isempty[data-t=line]::after{content:"대사"}
 .sheet .b.cur.isempty[data-t=paren]::after{content:"(지시문)"}
-.sheet .b.cur.isempty[data-t=scene]{color:var(--accent)}
+.sheet .b.cur.isempty[data-t=scene]{color:var(--accent-ink)}
 
 /* suggestions */
 .sugg{position:fixed;z-index:50;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:4px;min-width:140px;font-size:13.5px}
 .sugg[hidden]{display:none}
 .sugg .si{padding:5px 10px;border-radius:6px;cursor:pointer}
 .sugg .si:hover{background:var(--panel)}
-.sugg .si.on{background:var(--accent-soft);color:var(--accent)}
+.sugg .si.on{background:var(--accent-soft);color:var(--accent-ink)}
 .sugg .sh{font-size:11px;color:var(--sub);padding:4px 10px 2px;border-top:1px solid var(--line);margin-top:3px}
 
 /* status */
@@ -120,20 +120,20 @@ aside section+section{margin-top:22px}
 .card{background:#fff;border-radius:14px;width:min(560px,100%);max-height:88vh;overflow:auto;padding:22px 24px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .card h2{margin:0 0 14px;font-size:17px;display:flex;justify-content:space-between;align-items:center}
 .card h4{margin:18px 0 8px;font-size:13px;color:var(--sub);font-weight:600}
-.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid #f1eee9}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid #EFEFEC}
 .row label{flex:1}
 .row small{display:block;color:var(--sub);font-size:12px}
 .row select,.row input[type=range]{width:170px}
-.row output{width:44px;text-align:right;color:var(--sub);font-variant-numeric:tabular-nums}
+.row output{width:52px;text-align:right;color:var(--sub);font-variant-numeric:tabular-nums}
 .styles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .styles label{border:1.5px solid var(--line);border-radius:10px;padding:10px;cursor:pointer;font-size:12px;color:var(--sub)}
-.styles label:has(input:checked){border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.styles label:has(input:checked){border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
 .styles input{display:none}
 .styles pre{margin:0 0 8px;font:12px/1.6 var(--font);color:var(--ink);background:#fff;border-radius:6px;padding:8px;min-height:62px;white-space:pre}
 .danger{color:#b91c1c;border-color:#f3caca}
 .danger:hover{background:#fdf0f0}
 .cheat{width:100%;border-collapse:collapse;font-size:13.5px}
-.cheat td{padding:7px 6px;border-bottom:1px solid #f1eee9;vertical-align:top}
+.cheat td{padding:7px 6px;border-bottom:1px solid #EFEFEC;vertical-align:top}
 .cheat td:first-child{white-space:nowrap;width:1%;padding-right:14px}
 kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:var(--panel);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:3px 6px;margin:0 1px}
 .exp{display:grid;gap:8px}
@@ -145,19 +145,21 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
 
 [hidden]{display:none!important}
 /* 퇴고 비교 */
-#origScroller{flex:1;overflow:auto;background:#e6e2da;border-right:1px solid #d8d2c8;min-width:0}
+#origScroller{flex:1;overflow:auto;background:#E3E3E1;border-right:1px solid #D4D5D1;min-width:0}
 .main.split #scroller{min-width:0}
 .main.split .page{padding:48px 44px 200px;margin-left:16px;margin-right:16px}
-.origbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 16px 14px;background:linear-gradient(#e6e2da 75%,transparent);font-size:13px}
+.origbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 16px 14px;background:linear-gradient(#E3E3E1 75%,transparent);font-size:13px}
 .origbar b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.olabel{font-size:11px;background:#5d5850;color:#fff;border-radius:5px;padding:2px 7px;flex:none}
-.revlabel{font-size:11px;background:var(--accent);color:#fff;border-radius:5px;padding:2px 7px;align-self:center}
+.olabel{font-size:11px;background:#6B6E68;color:#fff;border-radius:5px;padding:2px 7px;flex:none}
+.revlabel{font-size:11px;background:var(--accent);color:#2F3F25;border-radius:5px;padding:2px 7px;align-self:center}
+.btn.sm{padding:3px 9px;font-size:12px}
+#reviseBtn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
 .tg{display:flex;align-items:center;gap:4px;color:var(--sub);font-size:12px;white-space:nowrap;cursor:pointer}
-.page.orig{background:#faf8f4}
+.page.orig{background:#FAFAF8}
 #orig{cursor:text}
-.main.split:not(.nodiff) .sheet .b.chg{background:rgba(194,65,12,.09);border-radius:3px}
-.main.split:not(.nodiff) #orig .b.del{background:rgba(90,85,78,.10);border-radius:3px;color:#8a847b;text-decoration:line-through;text-decoration-color:rgba(138,132,123,.6)}
-.acct.on{border-color:var(--accent);color:var(--accent)}
+.main.split:not(.nodiff) .sheet .b.chg{background:rgba(193,207,178,.55);border-radius:3px}
+.main.split:not(.nodiff) #orig .b.del{background:rgba(100,104,96,.10);border-radius:3px;color:#8A8D86;text-decoration:line-through;text-decoration-color:rgba(128,132,124,.6)}
+.acct.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
 .tabs{display:flex;gap:4px;background:var(--panel);padding:3px;border-radius:10px;margin-bottom:12px}
 .tabs button{flex:1;border:none;background:none;padding:6px;border-radius:7px;color:var(--sub)}
 .tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
@@ -196,7 +198,7 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
   <input id="title" placeholder="작품 제목" spellcheck="false">
   <div class="sp"></div>
   <span class="saved" id="saved"></span>
-  <button class="btn" id="reviseBtn" title="지금 작품을 복사해서 원본과 나란히 놓고 고치기">＋ 퇴고하기</button>
+  <button class="btn" id="reviseBtn" title="원본과 퇴고본을 나란히 놓고 수정합니다">퇴고 모드</button>
   <button class="btn acct" id="acctBtn">게스트 · 로그인</button>
   <button class="btn" id="helpBtn">사용법</button>
   <button class="btn" id="setBtn">설정</button>
@@ -213,7 +215,7 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
       <h3>등장인물</h3>
       <div id="chars"></div>
       <input id="charIn" placeholder="이름 추가 (Enter)" spellcheck="false">
-      <p class="tip">이름을 누르면 바로 그 인물 대사가 시작돼. 등록해 두면 자동완성되고, ‘형사 1’처럼 띄어쓰기 있는 이름도 제대로 인식해.</p>
+      <p class="tip">이름을 누르면 해당 인물의 대사가 바로 시작됩니다. 등록한 이름은 자동완성되며, ‘형사 1’처럼 띄어쓰기가 있는 이름도 정확히 인식합니다.</p>
     </section>
   </aside>
 
@@ -222,6 +224,7 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
       <span class="olabel">원본</span><b id="origTitle"></b><div class="sp"></div>
       <label class="tg"><input type="checkbox" id="o-diff">바뀐 줄 표시</label>
       <label class="tg"><input type="checkbox" id="o-sync">스크롤 맞추기</label>
+      <button class="btn sm" id="newRevBtn" title="지금 퇴고본을 복사해 다음 퇴고본을 만듭니다">새 퇴고본</button>
       <button class="icon" id="origClose" title="비교 닫기">✕</button>
     </div>
     <div class="page orig"><div id="orig" class="sheet"></div></div>
@@ -236,11 +239,6 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
         <button data-t="line">대사<kbd>^4</kbd></button>
       </div>
       <span class="revlabel" id="revLabel" hidden>퇴고본</span>
-      <button class="btn" id="cmpBtn" hidden>원본 비교</button>
-      <div class="seg">
-        <button id="undoBtn" title="실행 취소 (⌘Z)">↶</button>
-        <button id="redoBtn" title="다시 실행 (⇧⌘Z)">↷</button>
-      </div>
     </div>
     <div class="page">
       <div id="printTitle"></div>
@@ -258,19 +256,19 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
 <div class="modal" id="m-help"><div class="card">
   <h2>사용법 <button class="icon" data-close>✕</button></h2>
   <table class="cheat">
-    <tr><td><kbd class="k">₩</kbd></td><td><b>씬 추가.</b> 줄 맨 앞에 치면 씬 제목이 되고 번호는 자동으로 매겨져. 중간에 씬을 넣거나 지워도 다시 번호가 매겨짐. (영문 상태의 <kbd class="k">\</kbd> <kbd class="k">`</kbd>도 같아)</td></tr>
-    <tr><td><kbd class="k">-</kbd></td><td><b>대사.</b> 줄 맨 앞에 치고 이름 → <kbd class="k">Space</kbd> / <kbd class="k">Tab</kbd> / <kbd class="k">Enter</kbd> 누르면 대사 칸으로 넘어가. 이름은 설정에 따라 자동 굵게.</td></tr>
-    <tr><td><kbd class="k">( )</kbd></td><td>지시문은 따로 형식 없이 대사 안에 그냥 써. <code>밥 먹었어? (웃으며) 그럼 됐어.</code></td></tr>
-    <tr><td><kbd class="k">Enter</kbd></td><td>씬 → 지문, 이름 → 대사, 대사 → 지문으로 자동 전환. 빈 줄에서 누르면 지문으로 돌아감.</td></tr>
-    <tr><td><kbd class="k">⇧</kbd><kbd class="k">Enter</kbd></td><td>같은 인물 대사 이어서 쓰기</td></tr>
-    <tr><td><kbd class="k">⌫</kbd></td><td>줄 맨 앞에서 누르면 그 줄을 지문으로 되돌림</td></tr>
-    <tr><td><kbd class="k">⌘</kbd><kbd class="k">Z</kbd></td><td>기호가 실수로 변환됐으면 바로 되돌리기 → 기호가 글자로 남아</td></tr>
-    <tr><td><kbd class="k">↑</kbd><kbd class="k">↓</kbd> <kbd class="k">Tab</kbd></td><td>이름 칸에서 자동완성 고르기</td></tr>
-    <tr><td><kbd class="k">Ctrl</kbd><kbd class="k">1~4</kbd></td><td>현재 줄 형식 바꾸기 (씬·지문·이름·대사)</td></tr>
-    <tr><td>＋ 퇴고하기</td><td>지금 작품을 복사한 퇴고본을 만들어서 왼쪽에 원본, 오른쪽에 퇴고본을 나란히 띄워. 고친 줄은 색으로 표시되고, 스크롤하면 원본도 같은 장면으로 따라와. 원본은 그대로 보존돼.</td></tr>
-    <tr><td>붙여넣기</td><td>메모장에 <code>₩거실 / 밤</code>, <code>-지우 밥 먹었어?</code> 식으로 써 둔 걸 붙여넣으면 형식이 자동으로 바뀜. 이 편집기에서 복사한 것도 형식이 유지돼.</td></tr>
+    <tr><td><kbd class="k">₩</kbd></td><td><b>씬 추가.</b> 줄 맨 앞에 입력하면 씬 제목이 되고 번호가 자동으로 매겨집니다. 중간에 씬을 추가하거나 삭제해도 번호가 다시 정리됩니다. (영문 입력 상태의 <kbd class="k">\</kbd> <kbd class="k">`</kbd>도 같은 기능입니다)</td></tr>
+    <tr><td><kbd class="k">-</kbd></td><td><b>대사.</b> 줄 맨 앞에 입력한 뒤 이름 → <kbd class="k">Space</kbd> / <kbd class="k">Tab</kbd> / <kbd class="k">Enter</kbd> 누르면 대사 칸으로 넘어갑니다. 이름은 설정에 따라 자동으로 굵게 표시됩니다.</td></tr>
+    <tr><td><kbd class="k">( )</kbd></td><td>지시문은 별도 형식 없이 대사 안에 함께 작성합니다. <code>밥 먹었어? (웃으며) 그럼 됐어.</code></td></tr>
+    <tr><td><kbd class="k">Enter</kbd></td><td>씬 → 지문, 이름 → 대사, 대사 → 지문으로 자동 전환됩니다. 빈 줄에서 누르면 지문으로 돌아갑니다.</td></tr>
+    <tr><td><kbd class="k">⇧</kbd><kbd class="k">Enter</kbd></td><td>같은 인물의 대사를 이어서 작성합니다.</td></tr>
+    <tr><td><kbd class="k">⌫</kbd></td><td>줄 맨 앞에서 누르면 해당 줄을 지문으로 되돌립니다.</td></tr>
+    <tr><td><kbd class="k">⌘</kbd><kbd class="k">Z</kbd></td><td>기호가 의도치 않게 변환되었을 때 되돌리면 기호가 글자로 남습니다.</td></tr>
+    <tr><td><kbd class="k">↑</kbd><kbd class="k">↓</kbd> <kbd class="k">Tab</kbd></td><td>이름 칸에서 자동완성 항목을 선택합니다.</td></tr>
+    <tr><td><kbd class="k">Ctrl</kbd><kbd class="k">1~4</kbd></td><td>현재 줄의 형식을 변경합니다. (씬·지문·이름·대사)</td></tr>
+    <tr><td>퇴고 모드</td><td>현재 작품을 복사한 퇴고본을 만들어 왼쪽에 원본, 오른쪽에 퇴고본을 나란히 표시합니다. 수정한 줄은 색으로 표시되며, 스크롤하면 원본도 같은 장면으로 이동합니다. 원본은 그대로 보존됩니다. 퇴고본에서 다시 누르면 비교 화면을 켜고 끌 수 있습니다.</td></tr>
+    <tr><td>붙여넣기</td><td>메모장에 <code>₩거실 / 밤</code>, <code>-지우 밥 먹었어?</code> 형식으로 작성한 글을 붙여넣으면 자동으로 변환됩니다. 이 편집기에서 복사한 내용도 형식이 유지됩니다.</td></tr>
   </table>
-  <p class="tip" style="margin-top:14px">게스트 모드에선 글이 이 브라우저에만 자동 저장돼. 로그인하면 계정에 저장돼서 다른 기기에서도 이어서 쓸 수 있어. 혹시 몰라 따로 보관하려면 내보내기 → 백업.</p>
+  <p class="tip" style="margin-top:14px">게스트 모드에서는 이 브라우저에만 자동 저장됩니다. 로그인하면 계정에 저장되어 다른 기기에서도 이어서 작성할 수 있습니다. 별도 보관이 필요하면 내보내기 → 백업을 이용해 주세요.</p>
 </div></div>
 
 <!-- 설정 -->
@@ -287,23 +285,24 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
   </div>
   <div class="row"><label for="s-cueBold">이름 굵게</label><input type="checkbox" id="s-cueBold"></div>
   <div class="row" id="cueWRow"><label for="s-cueWidth">이름 칸 너비<small>왼쪽 · 탭 형식일 때</small></label><input type="range" id="s-cueWidth" min="3" max="12" step="0.5"><output id="o-cueWidth"></output></div>
-  <div class="row"><label for="s-spaceSplit">이름 뒤 띄어쓰기로 대사 시작<small>끄면 Tab이나 Enter로만 넘어가</small></label><input type="checkbox" id="s-spaceSplit"></div>
+  <div class="row"><label for="s-spaceSplit">이름 뒤 띄어쓰기로 대사 시작<small>끄면 Tab 또는 Enter로만 넘어갑니다</small></label><input type="checkbox" id="s-spaceSplit"></div>
   <h4>씬</h4>
   <div class="row"><label for="s-sceneFmt">씬 번호 형식</label><select id="s-sceneFmt"></select></div>
+  <div class="row"><label for="s-sceneSize">씬 제목 크기<small>씬 번호와 장소 / 시간 줄</small></label><input type="range" id="s-sceneSize" min="10" max="28" step="0.5"><output id="o-sceneSize"></output></div>
   <div class="row"><label for="s-sceneBold">씬 제목 굵게</label><input type="checkbox" id="s-sceneBold"></div>
   <h4>글꼴</h4>
   <div class="row"><label for="s-font">글꼴</label><select id="s-font"><option value="sans">고딕</option><option value="serif">명조</option></select></div>
-  <div class="row"><label for="s-fontSize">글자 크기</label><input type="range" id="s-fontSize" min="12" max="20" step="0.5"><output id="o-fontSize"></output></div>
-  <div class="row"><label for="s-lineHeight">줄 간격</label><input type="range" id="s-lineHeight" min="1.3" max="2.4" step="0.05"><output id="o-lineHeight"></output></div>
+  <div class="row"><label for="s-fontSize">글자 크기</label><input type="range" id="s-fontSize" min="10" max="20" step="0.5"><output id="o-fontSize"></output></div>
+  <div class="row"><label for="s-lineHeight">줄 간격</label><input type="range" id="s-lineHeight" min="1" max="2.4" step="0.05"><output id="o-lineHeight"></output></div>
   <h4>작품</h4>
-  <div class="row"><label>이 작품 삭제<small>되돌릴 수 없으니 먼저 백업해 둬</small></label><button class="btn danger" id="delDocBtn">삭제</button></div>
+  <div class="row"><label>이 작품 삭제<small>되돌릴 수 없으니 먼저 백업해 주세요</small></label><button class="btn danger" id="delDocBtn">삭제</button></div>
 </div></div>
 
 <!-- 계정 -->
 <div class="modal" id="m-acct"><div class="card" style="width:min(400px,100%)">
   <h2><span id="acctTitle">로그인</span> <button class="icon" data-close>✕</button></h2>
   <div id="acctOut" hidden>
-    <p class="tip" style="margin:0 0 14px">로그인하면 작품이 계정에 저장돼서 다른 컴퓨터에서도 이어서 쓸 수 있어. 게스트로 쓰던 작품은 로그인할 때 계정으로 옮겨져.</p>
+    <p class="tip" style="margin:0 0 14px">로그인하면 작품이 계정에 저장되어 다른 기기에서도 이어서 작성할 수 있습니다. 게스트 모드에서 작성한 작품은 로그인 시 계정으로 옮겨집니다.</p>
     <div class="tabs"><button data-mode="login" class="on">로그인</button><button data-mode="signup">회원가입</button></div>
     <input id="a-email" type="email" placeholder="이메일" autocomplete="email">
     <input id="a-pw" type="password" placeholder="비밀번호 (6자 이상)" autocomplete="current-password">
@@ -311,13 +310,13 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
     <p class="aerr" id="a-err"></p>
     <button class="btn primary wide" id="a-submit">로그인</button>
     <button class="btn wide" id="a-google">Google로 계속하기</button>
-    <button class="linkbtn" id="a-reset">비밀번호를 잊었어</button>
+    <button class="linkbtn" id="a-reset">비밀번호를 잊으셨나요?</button>
   </div>
   <div id="acctIn" hidden>
     <p style="margin:0 0 4px"><b id="a-who"></b></p>
     <p class="tip" id="a-sync" style="margin:0 0 14px"></p>
     <button class="btn wide" id="a-logout">로그아웃</button>
-    <p class="tip">로그아웃하면 게스트 모드로 돌아가. 계정 작품은 다시 로그인하면 그대로 있어.</p>
+    <p class="tip">로그아웃하면 게스트 모드로 전환됩니다. 계정에 저장된 작품은 다시 로그인하면 그대로 이용할 수 있습니다.</p>
   </div>
   <div id="acctNoCfg"><p class="tip" style="margin:0"></p></div>
 </div></div>
@@ -326,14 +325,14 @@ kbd.k{display:inline-block;font:12px/1 ui-monospace,Menlo,monospace;background:v
 <div class="modal" id="m-exp"><div class="card">
   <h2>내보내기 · 불러오기 <button class="icon" data-close>✕</button></h2>
   <div class="exp">
-    <button id="x-word" style="border-color:var(--accent);background:var(--accent-soft)">워드용으로 전체 복사<small>워드에서 ⌘V / Ctrl+V 하면 씬 번호·굵기·정렬·대사 들여쓰기가 그대로 들어가. 폰트만 바꾸면 끝</small></button>
-    <button id="x-doc">Word 파일 (.doc)<small>바로 워드로 열리는 파일로 저장</small></button>
-    <button id="x-print">PDF / 인쇄<small>A4 기준. 인쇄 창에서 ‘PDF로 저장’ 선택</small></button>
-    <button id="x-txt">텍스트 파일 (.txt)<small>지금 대사 형식대로 정리된 일반 텍스트</small></button>
-    <button id="x-src">기호 원고 복사<small>₩ / - 기호 그대로 클립보드에 복사 (다른 곳에 붙여넣었다가 다시 가져오기 좋음)</small></button>
+    <button id="x-word" style="border-color:var(--accent);background:var(--accent-soft)">워드용으로 전체 복사<small>워드에 붙여넣으면 씬 번호·굵기·정렬·대사 들여쓰기가 그대로 적용됩니다. 글꼴만 변경하면 완성됩니다</small></button>
+    <button id="x-doc">Word 파일 (.doc)<small>워드에서 바로 열 수 있는 파일로 저장합니다</small></button>
+    <button id="x-print">PDF / 인쇄<small>A4 기준입니다. 인쇄 창에서 ‘PDF로 저장’을 선택해 주세요</small></button>
+    <button id="x-txt">텍스트 파일 (.txt)<small>현재 대사 형식대로 정리된 일반 텍스트입니다</small></button>
+    <button id="x-src">기호 원고 복사<small>₩ / - 기호를 유지한 채 클립보드에 복사합니다 (다른 곳에 보관했다가 다시 불러오기 좋습니다)</small></button>
     <button id="x-json">이 작품 백업 (.json)</button>
     <button id="x-all">전체 작품 백업 (.json)</button>
-    <button id="x-import">불러오기<small>.json 백업 또는 ₩ / - 기호로 쓴 .txt</small></button>
+    <button id="x-import">불러오기<small>.json 백업 파일 또는 ₩ / - 기호로 작성한 .txt 파일</small></button>
   </div>
 </div></div>
 
@@ -368,7 +367,7 @@ const HINT={
 const SCENE_TRIG=['₩','\\','`','￦'];
 const SCENE_FMTS=[{pre:'S#',suf:'.'},{pre:'S#',suf:''},{pre:'#',suf:'.'},{pre:'',suf:'.'},{pre:'씬 ',suf:'.'}];
 const FONTS={sans:'"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif',serif:'"AppleMyungjo","Nanum Myeongjo","NanumMyeongjo","Batang","Noto Serif KR",serif'};
-const DEF={dlgStyle:'center',cueBold:true,sceneBold:true,cueWidth:6,sceneFmt:0,font:'sans',fontSize:15,lineHeight:1.8,spaceSplit:true,cmpDiff:true,cmpSync:true};
+const DEF={dlgStyle:'center',cueBold:true,sceneBold:true,cueWidth:6,sceneFmt:0,font:'sans',fontSize:11,sceneSize:11,fsUnit:'pt',lineHeight:1.8,spaceSplit:true,cmpDiff:true,cmpSync:true};
 const GUEST_KEY='mescript-v1',LAST_UID='mescripter-last-uid',ukeyOf=uid=>'mescripter-u-'+uid;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>Math.random().toString(36).slice(2,10);
@@ -386,13 +385,19 @@ function sampleDoc(){
     {t:'cue',x:'엄마'},
     {t:'line',x:'(방문 너머로) 아직도 안 자? (한숨) 내일 1교시라며.'},
     {t:'scene',x:'거실 / 새벽'},
-    {t:'action',x:'이 예시는 지우고 써도 돼. 새 작품은 위의 ＋ 버튼.'}
+    {t:'action',x:'이 예시는 지우고 작성하셔도 됩니다. 새 작품은 상단의 ＋ 버튼으로 만들 수 있습니다.'}
   ];
   return d;
 }
+// 예전 버전(px 단위) 설정을 pt로 바꿈
+function fixSettings(o){
+  o=Object.assign({},o||{});
+  if(o.fontSize&&o.fsUnit!=='pt'){o.fontSize=Math.round(o.fontSize*0.75*2)/2;o.fsUnit='pt'}
+  const r=Object.assign({},DEF,o);if(!o.sceneSize)r.sceneSize=r.fontSize;return r;
+}
 function readStore(key){
   try{const s=JSON.parse(localStorage.getItem(key));
-    if(s&&s.docs&&Array.isArray(s.order)){s.settings=Object.assign({},DEF,s.settings);return s}}catch(e){}
+    if(s&&s.docs&&Array.isArray(s.order)){s.settings=fixSettings(s.settings);return s}}catch(e){}
   return null;
 }
 const validState=s=>!!(s&&s.order.length&&s.docs[s.cur]);
@@ -628,7 +633,7 @@ ed.addEventListener('keydown',e=>{
 });
 document.addEventListener('keydown',e=>{
   const mod=e.metaKey||e.ctrlKey;
-  if(mod&&e.code==='KeyS'){e.preventDefault();saveNow();toast('저장됨')}
+  if(mod&&e.code==='KeyS'){e.preventDefault();saveNow();toast('저장되었습니다')}
 });
 
 /* ---------- copy / paste ---------- */
@@ -668,7 +673,7 @@ function parseSource(text){
 const DIALOG=new Set(['cue','line','paren']);
 /* 워드 붙여넣기용 HTML: 워드는 CSS 클래스를 못 읽어서 서식을 문단마다 직접 넣음 */
 function wordHTML(blocks){
-  const f=fmt(),pt=S.fontSize*0.75,r=v=>(+v).toFixed(1);
+  const f=fmt(),pt=S.fontSize,spt=S.sceneSize,r=v=>(+v).toFixed(1);
   const ff=S.font==='serif'?"'바탕',Batang,serif":"'맑은 고딕','Malgun Gothic',sans-serif";
   const cw=r(S.cueWidth*pt),lh=Math.round(S.lineHeight/1.2*100);
   const base=`margin:0;font-family:${ff};font-size:${r(pt)}pt;line-height:${lh}%;`;
@@ -677,7 +682,7 @@ function wordHTML(blocks){
   const gap=r(pt*.9);let n=0,html='';
   for(let i=0;i<blocks.length;i++){
     const b=blocks[i],nx=blocks[i+1],prev=blocks[i-1],x=esc(b.x);
-    if(b.t==='scene'){n++;html+=P(`margin-top:${html?r(pt*1.9):0}pt;margin-bottom:${r(pt*.55)}pt;${S.sceneBold?'font-weight:bold;':''}`,esc(f.pre+n+f.suf)+' '+x);continue}
+    if(b.t==='scene'){n++;html+=P(`font-size:${r(spt)}pt;margin-top:${html?r(spt*1.9):0}pt;margin-bottom:${r(spt*.55)}pt;${S.sceneBold?'font-weight:bold;':''}`,esc(f.pre+n+f.suf)+' '+x);continue}
     if(b.t==='action'){html+=P(prev&&(prev.t==='line'||prev.t==='paren')?`margin-top:${gap}pt;`:'',x);continue}
     const col=b.t==='paren'?'color:#555555;':'';
     if(b.t==='cue'){
@@ -801,7 +806,7 @@ function fmt(){return SCENE_FMTS[S.sceneFmt]||SCENE_FMTS[0]}
 function refreshScenes(){
   const f=fmt();let n=0,html='';
   for(const b of ed.children)if(b.dataset.t==='scene'){n++;html+=`<li data-n="${n}"><span>${esc(f.pre+n+f.suf)}</span>${esc(b.textContent)||'<em style="color:var(--faint)">(제목 없음)</em>'}</li>`}
-  $('#scenes').innerHTML=html||'<p class="empty">₩ 를 쳐서 첫 씬을 만들어 봐</p>';
+  $('#scenes').innerHTML=html||'<p class="empty">₩ 를 입력해 첫 씬을 만들어 보세요</p>';
   $('#sceneCount').textContent=n||'';
 }
 function refreshChars(){
@@ -809,7 +814,7 @@ function refreshChars(){
   for(const b of ed.children)if(b.dataset.t==='cue'){const n=b.textContent.trim();if(n)counts[n]=(counts[n]||0)+1}
   const extra=Object.keys(counts).filter(n=>!d.chars.includes(n));
   $('#chars').innerHTML=(d.chars.map(n=>`<span class="chip" data-n="${esc(n)}">${esc(n)}<i>${counts[n]||0}</i><b data-del="1" title="등록 해제">×</b></span>`).join('')+
-    extra.map(n=>`<span class="chip ghost" data-n="${esc(n)}">${esc(n)}<i>${counts[n]}</i><b data-add="1" title="등록">＋</b></span>`).join(''))||'<p class="empty">아직 없음</p>';
+    extra.map(n=>`<span class="chip ghost" data-n="${esc(n)}">${esc(n)}<i>${counts[n]}</i><b data-add="1" title="등록">＋</b></span>`).join(''))||'<p class="empty">등록된 인물이 없습니다</p>';
 }
 function refreshStats(){
   let sc=0,dl=0,ch=0;
@@ -848,8 +853,6 @@ $('#charIn').addEventListener('keydown',e=>{
   e.target.value='';touch(curDoc());refreshChars();scheduleSave();
 });
 $('#typeSeg').addEventListener('mousedown',e=>{const bt=e.target.closest('button');if(!bt)return;e.preventDefault();setCurType(bt.dataset.t)});
-$('#undoBtn').addEventListener('mousedown',e=>{e.preventDefault();undo()});
-$('#redoBtn').addEventListener('mousedown',e=>{e.preventDefault();redo()});
 $('#sideBtn').addEventListener('click',()=>$('#side').classList.toggle('hide'));
 if(innerWidth<860)$('#side').classList.add('hide');
 
@@ -862,7 +865,7 @@ function saveNow(){
   if(d){const nb=readBlocks(),sig=JSON.stringify(nb);
     if(sig!==lastSig.get(d.id)){d.blocks=nb;lastSig.set(d.id,sig);touch(d)}}
   try{localStorage.setItem(storeKey,JSON.stringify(state));$('#saved').textContent=user?(cloudMsg||'저장됨'):'이 브라우저에 저장됨'}
-  catch(e){$('#saved').textContent='저장 실패 — 백업해 줘'}
+  catch(e){$('#saved').textContent='저장 실패 — 백업해 주세요'}
   scheduleCloud();
 }
 addEventListener('beforeunload',saveNow);
@@ -885,7 +888,7 @@ $('#newDocBtn').addEventListener('click',()=>{saveNow();const d=addDoc(newDoc())
 $('#title').addEventListener('input',e=>{curDoc().title=e.target.value;touch(curDoc());const o=$('#docSel').selectedOptions[0];if(o)o.textContent=e.target.value||'제목 없음';scheduleSave()});
 $('#title').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();ed.focus()}});
 $('#delDocBtn').addEventListener('click',()=>{
-  const d=curDoc();if(!confirm(`‘${d.title}’을(를) 삭제할까? 되돌릴 수 없어.`))return;
+  const d=curDoc();if(!confirm(`‘${d.title}’을(를) 삭제하시겠습니까? 되돌릴 수 없습니다.`))return;
   delete state.docs[d.id];state.order=state.order.filter(x=>x!==d.id);cloudDelete(d.id);metaDirty=true;
   if(!state.order.length)addDoc(newDoc());
   closeModal();openDoc(state.order[0],false);
@@ -904,14 +907,14 @@ function applySettings(){
   st.setProperty('--cue-w',S.cueWidth+'em');
   st.setProperty('--scene-pre',JSON.stringify(f.pre));st.setProperty('--scene-suf',JSON.stringify(f.suf));
   st.setProperty('--font',FONTS[S.font]||FONTS.sans);
-  st.setProperty('--fs',S.fontSize+'px');st.setProperty('--lh',S.lineHeight);
+  st.setProperty('--fs',S.fontSize+'pt');st.setProperty('--scene-fs',S.sceneSize+'pt');st.setProperty('--lh',S.lineHeight);
   $('#cueWRow').style.display=S.dlgStyle==='left'?'':'none';
-  $('#o-cueWidth').textContent=S.cueWidth;$('#o-fontSize').textContent=S.fontSize;$('#o-lineHeight').textContent=(+S.lineHeight).toFixed(2);
+  $('#o-cueWidth').textContent=S.cueWidth;$('#o-fontSize').textContent=S.fontSize+'pt';$('#o-sceneSize').textContent=S.sceneSize+'pt';$('#o-lineHeight').textContent=(+S.lineHeight).toFixed(2);
 }
 function fillSettings(){
   document.querySelectorAll('input[name=dlg]').forEach(r=>r.checked=r.value===S.dlgStyle);
   $('#s-cueBold').checked=S.cueBold;$('#s-sceneBold').checked=S.sceneBold;$('#s-spaceSplit').checked=S.spaceSplit;
-  $('#s-cueWidth').value=S.cueWidth;$('#s-fontSize').value=S.fontSize;$('#s-lineHeight').value=S.lineHeight;
+  $('#s-cueWidth').value=S.cueWidth;$('#s-fontSize').value=S.fontSize;$('#s-sceneSize').value=S.sceneSize;$('#s-lineHeight').value=S.lineHeight;
   fmtSel.value=S.sceneFmt;$('#s-font').value=S.font;
 }
 $('#m-set').addEventListener('input',e=>{
@@ -945,10 +948,10 @@ function toPlain(){
 }
 $('#x-word').addEventListener('click',async()=>{
   const bl=readBlocks();const ok=await copyRich(wordHTML(bl),toPlain());
-  closeModal();toast(ok?'복사했어 — 워드에 붙여넣기만 하면 돼':'복사가 막혔어. Word 파일(.doc)로 받아줘');
+  closeModal();toast(ok?'복사되었습니다. 워드에 붙여넣어 주세요':'복사할 수 없습니다. Word 파일(.doc)로 저장해 주세요');
 });
 $('#x-doc').addEventListener('click',()=>{
-  const d=curDoc(),pt=S.fontSize*0.75,ff=S.font==='serif'?"'바탕',Batang,serif":"'맑은 고딕','Malgun Gothic',sans-serif";
+  const d=curDoc(),pt=S.fontSize,ff=S.font==='serif'?"'바탕',Batang,serif":"'맑은 고딕','Malgun Gothic',sans-serif";
   const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>${esc(d.title)}</title><style>@page Section1{size:21cm 29.7cm;margin:2.5cm 2.2cm}div.Section1{page:Section1}</style></head><body><div class="Section1"><p style="margin:0 0 ${(pt*2).toFixed(1)}pt;text-align:center;font-family:${ff};font-size:${(pt*1.4).toFixed(1)}pt;font-weight:bold">${esc(d.title)}</p>${wordHTML(readBlocks())}</div></body></html>`;
   download(safeName(d.title)+'.doc','\ufeff'+html,'application/msword');
 });
@@ -957,8 +960,8 @@ addEventListener('beforeprint',()=>{$('#printTitle').textContent=curDoc().title}
 $('#x-txt').addEventListener('click',()=>download(safeName(curDoc().title)+'.txt',toPlain()));
 $('#x-src').addEventListener('click',async()=>{
   const s=toSource(readBlocks());
-  try{await navigator.clipboard.writeText(s);toast('기호 원고를 복사했어')}
-  catch(e){download(safeName(curDoc().title)+'_원고.txt',s);toast('복사가 막혀서 파일로 저장했어')}
+  try{await navigator.clipboard.writeText(s);toast('기호 원고가 복사되었습니다')}
+  catch(e){download(safeName(curDoc().title)+'_원고.txt',s);toast('복사할 수 없어 파일로 저장했습니다')}
 });
 $('#x-json').addEventListener('click',()=>{saveNow();const d=curDoc();
   download(safeName(d.title)+'.mescripter.json',JSON.stringify({app:'Me.Scripter',v:1,title:d.title,chars:d.chars,blocks:d.blocks},null,1),'application/json')});
@@ -978,8 +981,8 @@ $('#fileIn').addEventListener('change',async e=>{
       for(const [d,ro] of made)if(ro&&idMap[ro])d.revOf=idMap[ro];
     }catch(err){}
   }else{const d=newDoc(f.name.replace(/\.[^.]+$/,''));d.blocks=parseSource(text);if(!d.blocks.length)d.blocks=[{t:'action',x:''}];last=addDoc(d)}
-  if(!last){toast('이 파일은 읽을 수 없어');return}
-  closeModal();openDoc(last.id,false);toast('불러왔어');
+  if(!last){toast('읽을 수 없는 파일입니다');return}
+  closeModal();openDoc(last.id,false);toast('불러왔습니다');
 });
 
 /* ---------- modals / toast ---------- */
@@ -1000,7 +1003,7 @@ function touch(d){d.updated=Date.now();dirtyDocs.add(d.id)}
 function setCloud(m){cloudMsg=m;if(user)$('#saved').textContent=m;$('#a-sync').textContent=m}
 function scheduleCloud(){if(!user||!fb)return;clearTimeout(cloudT);cloudT=setTimeout(pushCloud,1500)}
 const docRef=(...p)=>fb.doc(fb.db,'scripter_users',user.uid,...p);
-const cloudErr=e=>e&&e.code==='permission-denied'?'클라우드 권한 오류 — Firestore 규칙 확인':'클라우드 저장 실패 — 잠시 후 다시 시도';
+const cloudErr=e=>e&&e.code==='permission-denied'?'클라우드 권한 오류가 발생했습니다':'클라우드 저장 실패 — 잠시 후 다시 시도합니다';
 async function pushCloud(){
   clearTimeout(cloudT);
   if(!user||!fb||(!dirtyDocs.size&&!metaDirty))return;
@@ -1039,7 +1042,7 @@ function mergeRemote(st,remote,withSettings){
   }
   const ro=remote.meta&&Array.isArray(remote.meta.order)?remote.meta.order:[];
   const seen=new Set();st.order=[...ro,...st.order,...Object.keys(st.docs)].filter(id=>st.docs[id]&&!seen.has(id)&&seen.add(id));
-  if(withSettings&&remote.meta&&remote.meta.settings)st.settings=Object.assign({},DEF,remote.meta.settings);
+  if(withSettings&&remote.meta&&remote.meta.settings)st.settings=fixSettings(remote.meta.settings);
   return curChanged;
 }
 function isPristine(d){
@@ -1052,7 +1055,7 @@ async function onUser(u){
     saveNow();user=null;try{localStorage.removeItem(LAST_UID)}catch(e){}
     dirtyDocs.clear();metaDirty=false;clearTimeout(cloudT);
     state=guestState();S=state.settings;storeKey=GUEST_KEY;applySettings();openDoc(state.cur,false);acctUI();
-    toast('게스트 모드로 돌아왔어');return;
+    toast('게스트 모드로 전환되었습니다');return;
   }
   if(user&&user.uid===u.uid)return;
   saveNow();
@@ -1062,7 +1065,7 @@ async function onUser(u){
   acctUI();setCloud('클라우드에서 불러오는 중…');
   let curChanged=false;
   try{const r=await fetchRemote();curChanged=mergeRemote(st,r,switching);setCloud('클라우드에 저장됨')}
-  catch(e){console.error(e);setCloud(e.code==='permission-denied'?'클라우드 권한 오류 — Firestore 규칙 확인':'클라우드 연결 실패')}
+  catch(e){console.error(e);setCloud(e.code==='permission-denied'?'클라우드 권한 오류가 발생했습니다':'클라우드 연결에 실패했습니다')}
   // 게스트로 쓰던 작품을 계정으로 옮기기
   let moved=0;const g=readStore(GUEST_KEY);
   if(g){for(const id of g.order){const d=g.docs[id];if(!d||isPristine(d)||st.docs[id])continue;
@@ -1074,7 +1077,7 @@ async function onUser(u){
   state=st;S=state.settings;storeKey=ukey;
   if(switching||curChanged){applySettings();openDoc(state.cur,false)}else{refreshDocSel();refreshAll();saveNow()}
   acctUI();
-  if(moved)toast(`게스트로 쓴 작품 ${moved}개를 계정으로 옮겼어`);
+  if(moved)toast(`게스트 모드에서 작성한 작품 ${moved}개를 계정으로 옮겼습니다`);
   pushCloud();
 }
 async function syncDown(){
@@ -1084,7 +1087,7 @@ async function syncDown(){
     const r=await fetchRemote();let ch=mergeRemote(state,r,false);
     if(!state.order.length){const d=newDoc();state.docs[d.id]=d;state.order.push(d.id);dirtyDocs.add(d.id);metaDirty=true}
     if(!state.docs[state.cur]){state.cur=state.order[0];ch=true}
-    if(ch){openDoc(state.cur,false);toast('다른 기기에서 바뀐 내용을 불러왔어')}
+    if(ch){openDoc(state.cur,false);toast('다른 기기에서 수정한 내용을 불러왔습니다')}
     else{refreshDocSel();try{localStorage.setItem(storeKey,JSON.stringify(state))}catch(e){}}
     if(dirtyDocs.size||metaDirty)scheduleCloud();
   }catch(e){console.error(e)}finally{syncing=false}
@@ -1099,9 +1102,9 @@ function acctUI(mode){
   else{b.textContent='게스트 · 로그인';b.classList.remove('on')}
   $('#acctTitle').textContent=user?'계정':'로그인';
   $('#acctOut').hidden=!!user||!fb;$('#acctIn').hidden=!user;$('#acctNoCfg').hidden=!!fb;
-  $('#acctNoCfg p').textContent=!FIREBASE_CONFIG?'아직 로그인 기능이 연결 안 돼 있어. index.html 맨 위 FIREBASE_CONFIG를 채우면 켜져. 지금은 게스트 모드로 이 브라우저에 저장돼.'
-    :acctMode==='file'?'로그인은 사이트 주소(GitHub Pages)로 열었을 때만 돼. 파일로 연 지금은 게스트 모드로만 쓸 수 있어.'
-    :acctMode==='err'?'로그인 기능을 불러오지 못했어. 인터넷 연결을 확인해줘.':'로그인 기능 불러오는 중…';
+  $('#acctNoCfg p').textContent=!FIREBASE_CONFIG?'로그인 기능이 연결되어 있지 않습니다. 현재는 게스트 모드로 이 브라우저에 저장됩니다.'
+    :acctMode==='file'?'로그인은 사이트 주소로 접속했을 때만 이용할 수 있습니다. 파일로 열면 게스트 모드로만 이용할 수 있습니다.'
+    :acctMode==='err'?'로그인 기능을 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.':'로그인 기능을 불러오는 중입니다…';
   if(user){$('#a-who').textContent=user.email||user.displayName||'';$('#a-sync').textContent=cloudMsg}
 }
 async function initCloud(){
@@ -1121,13 +1124,13 @@ async function initCloud(){
 let authMode='login';
 const aErr=(m,ok)=>{const el=$('#a-err');el.textContent=m||'';el.classList.toggle('ok',!!ok)};
 function authMsg(e){const c=(e&&e.code)||'';return({
-  'auth/email-already-in-use':'이미 가입된 이메일이야. 로그인해줘','auth/invalid-email':'이메일 형식이 이상해',
-  'auth/weak-password':'비밀번호는 6자 이상이어야 해','auth/invalid-credential':'이메일이나 비밀번호가 틀렸어',
-  'auth/wrong-password':'이메일이나 비밀번호가 틀렸어','auth/user-not-found':'가입되지 않은 이메일이야',
-  'auth/missing-password':'비밀번호를 적어줘','auth/too-many-requests':'시도가 너무 많아. 잠시 후 다시 해줘',
-  'auth/unauthorized-domain':'이 주소가 Firebase 승인된 도메인에 없어','auth/operation-not-allowed':'Firebase에서 이 로그인 방식이 꺼져 있어',
-  'auth/network-request-failed':'인터넷 연결을 확인해줘','auth/popup-blocked':'팝업이 차단됐어. 팝업을 허용해줘'
-})[c]||('로그인 실패 ('+(c||'알 수 없음')+')')}
+  'auth/email-already-in-use':'이미 가입된 이메일입니다. 로그인해 주세요','auth/invalid-email':'이메일 형식이 올바르지 않습니다',
+  'auth/weak-password':'비밀번호는 6자 이상이어야 합니다','auth/invalid-credential':'이메일 또는 비밀번호가 올바르지 않습니다',
+  'auth/wrong-password':'이메일 또는 비밀번호가 올바르지 않습니다','auth/user-not-found':'가입되지 않은 이메일입니다',
+  'auth/missing-password':'비밀번호를 입력해 주세요','auth/too-many-requests':'시도 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요',
+  'auth/unauthorized-domain':'승인되지 않은 도메인입니다','auth/operation-not-allowed':'현재 사용할 수 없는 로그인 방식입니다',
+  'auth/network-request-failed':'인터넷 연결을 확인해 주세요','auth/popup-blocked':'팝업이 차단되었습니다. 팝업을 허용해 주세요'
+})[c]||('로그인에 실패했습니다 ('+(c||'알 수 없음')+')')}
 document.querySelectorAll('#m-acct .tabs button').forEach(bt=>bt.addEventListener('click',()=>{
   authMode=bt.dataset.mode;document.querySelectorAll('#m-acct .tabs button').forEach(x=>x.classList.toggle('on',x===bt));
   $('#a-pw2').hidden=authMode!=='signup';$('#a-submit').textContent=authMode==='signup'?'가입하기':'로그인';
@@ -1135,7 +1138,7 @@ document.querySelectorAll('#m-acct .tabs button').forEach(bt=>bt.addEventListene
 }));
 async function submitAuth(){
   if(!fb)return;const em=$('#a-email').value.trim(),pw=$('#a-pw').value;
-  if(authMode==='signup'&&pw!==$('#a-pw2').value){aErr('비밀번호가 서로 달라');return}
+  if(authMode==='signup'&&pw!==$('#a-pw2').value){aErr('비밀번호가 일치하지 않습니다');return}
   const bt=$('#a-submit');bt.disabled=true;aErr('');
   try{
     if(authMode==='signup')await fb.createUserWithEmailAndPassword(fb.auth,em,pw);
@@ -1151,8 +1154,8 @@ $('#a-google').addEventListener('click',async()=>{
   catch(e){if(e.code!=='auth/popup-closed-by-user'&&e.code!=='auth/cancelled-popup-request')aErr(authMsg(e))}
 });
 $('#a-reset').addEventListener('click',async()=>{
-  if(!fb)return;const em=$('#a-email').value.trim();if(!em){aErr('이메일을 먼저 적어줘');return}
-  try{await fb.sendPasswordResetEmail(fb.auth,em);aErr('비밀번호 재설정 메일을 보냈어',true)}catch(e){aErr(authMsg(e))}
+  if(!fb)return;const em=$('#a-email').value.trim();if(!em){aErr('이메일을 먼저 입력해 주세요');return}
+  try{await fb.sendPasswordResetEmail(fb.auth,em);aErr('비밀번호 재설정 메일을 보냈습니다',true)}catch(e){aErr(authMsg(e))}
 });
 $('#a-logout').addEventListener('click',async()=>{
   if(!fb)return;saveNow();await pushCloud();await fb.signOut(fb.auth);closeModal();
@@ -1166,7 +1169,7 @@ function origDoc(){const d=curDoc();return d&&d.revOf?state.docs[d.revOf]||null:
 function updateRevUI(){
   const isRev=!!curDoc().revOf,o=origDoc();
   $('#revLabel').hidden=!isRev;$('#revLabel').textContent=o?'퇴고본':'퇴고본 · 원본 없음';
-  $('#cmpBtn').hidden=!o||cmpOn;
+  $('#reviseBtn').classList.toggle('on',cmpOn);
 }
 function setCompare(on){
   const o=origDoc();cmpOn=!!(on&&o);
@@ -1226,10 +1229,11 @@ function startRevision(){
   const d=newDoc(`${base} (퇴고 ${k+1})`);
   d.blocks=readBlocks();d.chars=[...src.chars];d.revOf=src.id;
   addDoc(d);openDoc(d.id,false);
-  toast('퇴고본을 만들었어 — 왼쪽 원본을 보면서 오른쪽에서 고치면 돼');
+  toast('퇴고본이 생성되었습니다. 왼쪽 원본을 참고해 오른쪽에서 수정하세요');
 }
-$('#reviseBtn').addEventListener('click',startRevision);
-$('#cmpBtn').addEventListener('click',()=>setCompare(true));
+// 퇴고본이면 비교 화면 켜기/끄기, 아니면 새 퇴고본 만들기
+$('#reviseBtn').addEventListener('click',()=>{if(origDoc())setCompare(!cmpOn);else startRevision()});
+$('#newRevBtn').addEventListener('click',startRevision);
 $('#origClose').addEventListener('click',()=>setCompare(false));
 $('#o-diff').addEventListener('change',e=>{S.cmpDiff=e.target.checked;mainEl.classList.toggle('nodiff',!S.cmpDiff);metaDirty=true;scheduleSave()});
 $('#o-sync').addEventListener('change',e=>{S.cmpSync=e.target.checked;metaDirty=true;scheduleSave();syncScroll()});
